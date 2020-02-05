@@ -23,11 +23,7 @@
         "illuminate/container": "^5.8|^6.0",
         "illuminate/database": "^5.8|^6.0",
         "illuminate/events": "^5.8|^6.0",
-<<<<<<< HEAD
-        "fernandolaraamaral/mdbext": "^v0.1",
-=======
         "mongodb/mongodb": "^1.4",
->>>>>>> parent of 6fb884c... Troquei a lib original do mongo
         "cedx/coveralls": "^11.2"
     },
     "require-dev": {
