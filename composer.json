@@ -1,5 +1,5 @@
 {
-    "name": "jenssegers/mongodb",
+    "name": "fernandolaraamaral/laravel-mongodb",
     "description": "A MongoDB based Eloquent model and Query builder for Laravel (Moloquent)",
     "keywords": [
         "laravel",
@@ -10,11 +10,11 @@
         "model",
         "moloquent"
     ],
-    "homepage": "https://github.com/jenssegers/laravel-mongodb",
+    "homepage": "https://github.com/fernandolaraamaral/laravel-mongodb",
     "authors": [
         {
-            "name": "Jens Segers",
-            "homepage": "https://jenssegers.com"
+            "name": "Fernando Lara",
+            "homepage": "http://nandolara.com"
         }
     ],
     "license": "MIT",
@@ -35,7 +35,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Jenssegers\\Mongodb": "src/"
+            "Fernando\\Mongodb": "src/"
         }
     },
     "autoload-dev": {
@@ -52,8 +52,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Jenssegers\\Mongodb\\MongodbServiceProvider",
-                "Jenssegers\\Mongodb\\MongodbQueueServiceProvider"
+                "Fernando\\Mongodb\\MongodbServiceProvider",
+                "Fernando\\Mongodb\\MongodbQueueServiceProvider"
             ]
         }
     }
