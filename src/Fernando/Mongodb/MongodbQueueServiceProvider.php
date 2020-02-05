@@ -1,10 +1,10 @@
 <?php
 
-namespace Jenssegers\Mongodb;
+namespace Fernando\Mongodb;
 
 use DB;
 use Illuminate\Queue\QueueServiceProvider;
-use Jenssegers\Mongodb\Queue\Failed\MongoFailedJobProvider;
+use Fernando\Mongodb\Queue\Failed\MongoFailedJobProvider;
 
 class MongodbQueueServiceProvider extends QueueServiceProvider
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Jenssegers\Mongodb\Schema;
+namespace Fernando\Mongodb\Schema;
 
 use Closure;
-use Jenssegers\Mongodb\Connection;
+use Fernando\Mongodb\Connection;
 
 class Builder extends \Illuminate\Database\Schema\Builder
 {

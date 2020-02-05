@@ -1,6 +1,6 @@
 <?php
 
-namespace Jenssegers\Mongodb\Eloquent;
+namespace Fernando\Mongodb\Eloquent;
 
 trait SoftDeletes
 {

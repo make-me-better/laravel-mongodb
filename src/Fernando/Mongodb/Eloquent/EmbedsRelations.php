@@ -1,10 +1,10 @@
 <?php
 
-namespace Jenssegers\Mongodb\Eloquent;
+namespace Fernando\Mongodb\Eloquent;
 
 use Illuminate\Support\Str;
-use Jenssegers\Mongodb\Relations\EmbedsMany;
-use Jenssegers\Mongodb\Relations\EmbedsOne;
+use Fernando\Mongodb\Relations\EmbedsMany;
+use Fernando\Mongodb\Relations\EmbedsOne;
 
 trait EmbedsRelations
 {
@@ -14,7 +14,7 @@ trait EmbedsRelations
      * @param string $localKey
      * @param string $foreignKey
      * @param string $relation
-     * @return \Jenssegers\Mongodb\Relations\EmbedsMany
+     * @return \Fernando\Mongodb\Relations\EmbedsMany
      */
     protected function embedsMany($related, $localKey = null, $foreignKey = null, $relation = null)
     {
@@ -48,7 +48,7 @@ trait EmbedsRelations
      * @param string $localKey
      * @param string $foreignKey
      * @param string $relation
-     * @return \Jenssegers\Mongodb\Relations\EmbedsOne
+     * @return \Fernando\Mongodb\Relations\EmbedsOne
      */
     protected function embedsOne($related, $localKey = null, $foreignKey = null, $relation = null)
     {

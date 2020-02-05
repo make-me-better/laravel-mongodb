@@ -1,6 +1,6 @@
 <?php
 
-namespace Jenssegers\Mongodb\Eloquent;
+namespace Fernando\Mongodb\Eloquent;
 
 use Carbon\Carbon;
 use DateTime;
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Jenssegers\Mongodb\Query\Builder as QueryBuilder;
+use Fernando\Mongodb\Query\Builder as QueryBuilder;
 use MongoDB\BSON\Binary;
 use MongoDB\BSON\ObjectID;
 use MongoDB\BSON\UTCDateTime;

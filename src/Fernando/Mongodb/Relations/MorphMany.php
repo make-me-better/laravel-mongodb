@@ -1,6 +1,6 @@
 <?php
 
-namespace Jenssegers\Mongodb\Relations;
+namespace Fernando\Mongodb\Relations;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\Relations\MorphMany as EloquentMorphMany;

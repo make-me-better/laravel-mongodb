@@ -1,6 +1,6 @@
 <?php
 
-namespace Jenssegers\Mongodb\Query;
+namespace Fernando\Mongodb\Query;
 
 use Closure;
 use DateTime;
@@ -9,7 +9,7 @@ use Illuminate\Database\Query\Expression;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Jenssegers\Mongodb\Connection;
+use Fernando\Mongodb\Connection;
 use MongoCollection;
 use MongoDB\BSON\Binary;
 use MongoDB\BSON\ObjectID;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Jenssegers\Mongodb;
+namespace Fernando\Mongodb;
 
 use Illuminate\Database\Connection as BaseConnection;
 use Illuminate\Support\Arr;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Jenssegers\Mongodb\Auth;
+namespace Fernando\Mongodb\Auth;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\MustVerifyEmail;
@@ -9,7 +9,7 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Jenssegers\Mongodb\Eloquent\Model;
+use Fernando\Mongodb\Eloquent\Model;
 
 class User extends Model implements
     AuthenticatableContract,

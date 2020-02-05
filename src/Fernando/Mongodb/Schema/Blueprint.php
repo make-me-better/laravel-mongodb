@@ -1,6 +1,6 @@
 <?php
 
-namespace Jenssegers\Mongodb\Schema;
+namespace Fernando\Mongodb\Schema;
 
 use Illuminate\Database\Connection;
 
@@ -8,13 +8,13 @@ class Blueprint extends \Illuminate\Database\Schema\Blueprint
 {
     /**
      * The MongoConnection object for this blueprint.
-     * @var \Jenssegers\Mongodb\Connection
+     * @var \Fernando\Mongodb\Connection
      */
     protected $connection;
 
     /**
      * The MongoCollection object for this blueprint.
-     * @var \Jenssegers\Mongodb\Collection|\MongoDB\Collection
+     * @var \Fernando\Mongodb\Collection|\MongoDB\Collection
      */
     protected $collection;
 

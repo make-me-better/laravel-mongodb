@@ -1,6 +1,6 @@
 <?php
 
-namespace Jenssegers\Mongodb\Query;
+namespace Fernando\Mongodb\Query;
 
 use Illuminate\Database\Query\Grammars\Grammar as BaseGrammar;
 
