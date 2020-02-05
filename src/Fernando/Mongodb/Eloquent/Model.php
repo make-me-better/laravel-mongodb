@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Fernando\Mongodb\Query\Builder as QueryBuilder;
-use MongoDB\BSON\Binary;
-use MongoDB\BSON\ObjectID;
-use MongoDB\BSON\UTCDateTime;
+use Fernando\MDBext\BSON\Binary;
+use Fernando\MDBext\BSON\ObjectID;
+use Fernando\MDBext\BSON\UTCDateTime;
 
 abstract class Model extends BaseModel
 {

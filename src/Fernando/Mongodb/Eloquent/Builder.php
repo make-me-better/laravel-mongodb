@@ -5,7 +5,7 @@ namespace Fernando\Mongodb\Eloquent;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Fernando\Mongodb\Helpers\QueriesRelationships;
 use MongoDB\Driver\Cursor;
-use MongoDB\Model\BSONDocument;
+use Fernando\MDBext\Model\BSONDocument;
 
 class Builder extends EloquentBuilder
 {

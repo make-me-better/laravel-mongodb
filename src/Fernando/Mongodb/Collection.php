@@ -3,8 +3,8 @@
 namespace Fernando\Mongodb;
 
 use Exception;
-use MongoDB\BSON\ObjectID;
-use MongoDB\Collection as MongoCollection;
+use Fernando\MDBext\BSON\ObjectID;
+use Fernando\MDBext\Collection as MongoCollection;
 
 class Collection
 {

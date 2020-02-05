@@ -4,7 +4,7 @@ namespace Fernando\Mongodb\Relations;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
-use MongoDB\BSON\ObjectID;
+use Fernando\MDBext\BSON\ObjectID;
 
 class EmbedsOne extends EmbedsOneOrMany
 {

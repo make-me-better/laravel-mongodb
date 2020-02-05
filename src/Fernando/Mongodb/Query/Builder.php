@@ -11,10 +11,10 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Fernando\Mongodb\Connection;
 use MongoCollection;
-use MongoDB\BSON\Binary;
-use MongoDB\BSON\ObjectID;
-use MongoDB\BSON\Regex;
-use MongoDB\BSON\UTCDateTime;
+use Fernando\MDBext\BSON\Binary;
+use Fernando\MDBext\BSON\ObjectID;
+use Fernando\MDBext\BSON\Regex;
+use Fernando\MDBext\BSON\UTCDateTime;
 
 class Builder extends BaseBuilder
 {
@@ -543,7 +543,7 @@ class Builder extends BaseBuilder
     /**
      * @inheritdoc
      */
-    public function insert(array $values)
+    public function insert(array $values, $options = [])
     {
         // Since every insert gets treated like a batch insert, we will have to detect
         // if the user is inserting a single document or an array of documents.
@@ -563,7 +563,7 @@ class Builder extends BaseBuilder
         }
 
         // Batch insert
-        $result = $this->collection->insertMany($values);
+        $result = $this->collection->insertMany($values, $options);
 
         return (1 == (int) $result->isAcknowledged());
     }
