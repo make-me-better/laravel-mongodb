@@ -130,6 +130,10 @@ class Builder extends BaseBuilder
         $this->connection = $connection;
         $this->processor = $processor;
         $this->useCollections = $this->shouldUseCollections();
+        
+        // Transaction
+        if(isset($_ENV["MDBSession"]))
+            $this->options["session"] = $_ENV["MDBSession"];
     }
 
     /**
@@ -543,7 +547,7 @@ class Builder extends BaseBuilder
     /**
      * @inheritdoc
      */
-    public function insert(array $values)
+    public function insert(array $values, $options = [])
     {
         // Since every insert gets treated like a batch insert, we will have to detect
         // if the user is inserting a single document or an array of documents.
@@ -562,8 +566,12 @@ class Builder extends BaseBuilder
             $values = [$values];
         }
 
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
+        
         // Batch insert
-        $result = $this->collection->insertMany($values);
+        $result = $this->collection->insertMany($values, $options);
 
         return (1 == (int) $result->isAcknowledged());
     }
@@ -571,9 +579,14 @@ class Builder extends BaseBuilder
     /**
      * @inheritdoc
      */
-    public function insertGetId(array $values, $sequence = null)
+    public function insertGetId(array $values, $sequence = null, array $options = [])
     {
-        $result = $this->collection->insertOne($values);
+        
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
+        
+        $result = $this->collection->insertOne($values, $options);
 
         if (1 == (int) $result->isAcknowledged()) {
             if ($sequence === null) {
@@ -594,6 +607,10 @@ class Builder extends BaseBuilder
         if (!Str::startsWith(key($values), '$')) {
             $values = ['$set' => $values];
         }
+        
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
 
         return $this->performUpdate($values, $options);
     }
@@ -616,6 +633,10 @@ class Builder extends BaseBuilder
             $query->orWhereNotNull($column);
         });
 
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
+        
         return $this->performUpdate($query, $options);
     }
 
@@ -665,7 +686,7 @@ class Builder extends BaseBuilder
     /**
      * @inheritdoc
      */
-    public function delete($id = null)
+    public function delete($id = null, $options = [])
     {
         // If an ID is passed to the method, we will set the where clause to check
         // the ID to allow developers to simply and quickly remove a single row
@@ -674,8 +695,12 @@ class Builder extends BaseBuilder
             $this->where('_id', '=', $id);
         }
 
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
+        
         $wheres = $this->compileWheres();
-        $result = $this->collection->DeleteMany($wheres);
+        $result = $this->collection->DeleteMany($wheres, $options);
         if (1 == (int) $result->isAcknowledged()) {
             return $result->getDeletedCount();
         }
@@ -743,7 +768,7 @@ class Builder extends BaseBuilder
      * @param bool $unique
      * @return int
      */
-    public function push($column, $value = null, $unique = false)
+    public function push($column, $value = null, $unique = false, $options = [])
     {
         // Use the addToSet operator in case we only want unique items.
         $operator = $unique ? '$addToSet' : '$push';
@@ -759,7 +784,11 @@ class Builder extends BaseBuilder
             $query = [$operator => [$column => $value]];
         }
 
-        return $this->performUpdate($query);
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
+        
+        return $this->performUpdate($query, $options);
     }
 
     /**
@@ -768,7 +797,7 @@ class Builder extends BaseBuilder
      * @param mixed $value
      * @return int
      */
-    public function pull($column, $value = null)
+    public function pull($column, $value = null, $options = [])
     {
         // Check if we passed an associative array.
         $batch = (is_array($value) && array_keys($value) === range(0, count($value) - 1));
@@ -782,7 +811,11 @@ class Builder extends BaseBuilder
             $query = [$operator => [$column => $value]];
         }
 
-        return $this->performUpdate($query);
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
+        
+        return $this->performUpdate($query, $options);
     }
 
     /**
@@ -790,7 +823,7 @@ class Builder extends BaseBuilder
      * @param mixed $columns
      * @return int
      */
-    public function drop($columns)
+    public function drop($columns, $options = [])
     {
         if (!is_array($columns)) {
             $columns = [$columns];
@@ -804,7 +837,11 @@ class Builder extends BaseBuilder
 
         $query = ['$unset' => $fields];
 
-        return $this->performUpdate($query);
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
+        
+        return $this->performUpdate($query, $options);
     }
 
     /**
@@ -827,6 +864,10 @@ class Builder extends BaseBuilder
         if (!array_key_exists('multiple', $options)) {
             $options['multiple'] = true;
         }
+        
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
 
         $wheres = $this->compileWheres();
         $result = $this->collection->UpdateMany($wheres, $query, $options);

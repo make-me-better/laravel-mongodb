@@ -35,10 +35,15 @@ class Builder extends EloquentBuilder
      */
     public function update(array $values, array $options = [])
     {
+        
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
+        
         // Intercept operations on embedded models and delegate logic
         // to the parent relation instance.
         if ($relation = $this->model->getParentRelation()) {
-            $relation->performUpdate($this->model, $values);
+            $relation->performUpdate($this->model, $values, $options);
 
             return 1;
         }
@@ -49,56 +54,76 @@ class Builder extends EloquentBuilder
     /**
      * @inheritdoc
      */
-    public function insert(array $values)
+    public function insert(array $values, array $options = [])
     {
+        
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
+        
         // Intercept operations on embedded models and delegate logic
         // to the parent relation instance.
         if ($relation = $this->model->getParentRelation()) {
-            $relation->performInsert($this->model, $values);
+            $relation->performInsert($this->model, $values, $options);
 
             return true;
         }
 
-        return parent::insert($values);
+        return parent::insert($values, $options);
     }
 
     /**
      * @inheritdoc
      */
-    public function insertGetId(array $values, $sequence = null)
+    public function insertGetId(array $values, $sequence = null, array $options = [])
     {
+        
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
+        
         // Intercept operations on embedded models and delegate logic
         // to the parent relation instance.
         if ($relation = $this->model->getParentRelation()) {
-            $relation->performInsert($this->model, $values);
+            $relation->performInsert($this->model, $values, $options);
 
             return $this->model->getKey();
         }
 
-        return parent::insertGetId($values, $sequence);
+        return parent::insertGetId($values, $sequence, $options);
     }
 
     /**
      * @inheritdoc
      */
-    public function delete()
+    public function delete(array $options = [])
     {
+        
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
+        
         // Intercept operations on embedded models and delegate logic
         // to the parent relation instance.
         if ($relation = $this->model->getParentRelation()) {
-            $relation->performDelete($this->model);
+            $relation->performDelete($this->model, $options);
 
             return $this->model->getKey();
         }
 
-        return parent::delete();
+        return parent::delete($options);
     }
 
     /**
      * @inheritdoc
      */
-    public function increment($column, $amount = 1, array $extra = [])
+    public function increment($column, $amount = 1, array $extra = [], array $options = [])
     {
+        
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
+        
         // Intercept operations on embedded models and delegate logic
         // to the parent relation instance.
         if ($relation = $this->model->getParentRelation()) {
@@ -111,7 +136,7 @@ class Builder extends EloquentBuilder
 
             $this->model->syncOriginalAttribute($column);
 
-            $result = $this->model->update([$column => $value]);
+            $result = $this->model->update([$column => $value], $options);
 
             return $result;
         }
@@ -122,8 +147,13 @@ class Builder extends EloquentBuilder
     /**
      * @inheritdoc
      */
-    public function decrement($column, $amount = 1, array $extra = [])
+    public function decrement($column, $amount = 1, array $extra = [], array $options = [])
     {
+        
+        // Transaction
+        if(!isset($options["session"]) && isset($_ENV["MDBSession"]))
+            $options["session"] = $_ENV["MDBSession"];
+        
         // Intercept operations on embedded models and delegate logic
         // to the parent relation instance.
         if ($relation = $this->model->getParentRelation()) {
@@ -136,7 +166,7 @@ class Builder extends EloquentBuilder
 
             $this->model->syncOriginalAttribute($column);
 
-            return $this->model->update([$column => $value]);
+            return $this->model->update([$column => $value], $options);
         }
 
         return parent::decrement($column, $amount, $extra);
