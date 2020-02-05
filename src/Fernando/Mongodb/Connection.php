@@ -4,7 +4,7 @@ namespace Fernando\Mongodb;
 
 use Illuminate\Database\Connection as BaseConnection;
 use Illuminate\Support\Arr;
-use Fernando\MDBext\Client;
+use MongoDB\Client;
 
 class Connection extends BaseConnection
 {

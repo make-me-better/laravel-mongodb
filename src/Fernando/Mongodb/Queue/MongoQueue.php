@@ -5,7 +5,7 @@ namespace Fernando\Mongodb\Queue;
 use Carbon\Carbon;
 use Illuminate\Queue\DatabaseQueue;
 use Fernando\Mongodb\Connection;
-use Fernando\MDBext\Operation\FindOneAndUpdate;
+use MongoDB\Operation\FindOneAndUpdate;
 
 class MongoQueue extends DatabaseQueue
 {

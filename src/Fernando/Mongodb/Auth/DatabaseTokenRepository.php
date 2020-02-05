@@ -5,7 +5,7 @@ namespace Fernando\Mongodb\Auth;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Auth\Passwords\DatabaseTokenRepository as BaseDatabaseTokenRepository;
-use Fernando\MDBext\BSON\UTCDateTime;
+use MongoDB\BSON\UTCDateTime;
 
 class DatabaseTokenRepository extends BaseDatabaseTokenRepository
 {
@@ -26,6 +26,23 @@ class DatabaseTokenRepository extends BaseDatabaseTokenRepository
      */
     protected function tokenExpired($createdAt)
     {
+        $createdAt = $this->convertDateTime($createdAt);
+
+        return parent::tokenExpired($createdAt);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function tokenRecentlyCreated($createdAt)
+    {
+        $createdAt = $this->convertDateTime($createdAt);
+        
+        return parent::tokenRecentlyCreated($createdAt);
+    }
+
+    private function convertDateTime($createdAt)
+    {
         // Convert UTCDateTime to a date string.
         if ($createdAt instanceof UTCDateTime) {
             $date = $createdAt->toDateTime();
@@ -37,24 +54,6 @@ class DatabaseTokenRepository extends BaseDatabaseTokenRepository
             $createdAt = $date->format('Y-m-d H:i:s');
         }
 
-        return parent::tokenExpired($createdAt);
-    }
-    
-    /**
-     * Determine if the token was recently created.
-     *
-     * @param  string  $createdAt
-     * @return bool
-     */
-    protected function tokenRecentlyCreated($createdAt)
-    {
-        
-        if ($this->throttle <= 0) {
-            return false;
-        }
-
-        return Carbon::parse($createdAt->toDateTime())->addSeconds(
-            $this->throttle
-        )->isFuture();
+        return $createdAt;
     }
 }
