@@ -53,7 +53,7 @@ class DatabaseTokenRepository extends BaseDatabaseTokenRepository
             return false;
         }
 
-        return Carbon::parse($createdAt->toDateTime())->addSeconds(
+        return \Carbon\Carbon::parse($createdAt->toDateTime())->addSeconds(
             $this->throttle
         )->isFuture();
     }
